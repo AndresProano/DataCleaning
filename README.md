@@ -164,3 +164,93 @@ data['distance_km'] = distances
 ````
 
 ![Figura 9. Info despues de agregar distancia en KM](https://github.com/AndresProano/DataCleaning/blob/main/images/9.png)
+
+<p>Para verificar que no tenemos datos redundantes, podemos usar:</p>
+
+````
+numeric_df = data.select_dtypes(include=['number'])
+
+plt.figure(figsize=(12, 8))
+sns.heatmap(numeric_df.corr(), cmap='coolwarm', annot=True, linewidth=0.5)
+plt.title('Correlation Matrix Heatmap')
+plt.show()
+````
+
+![Figura 10. correlation matrix heatmap]()
+
+<p>Podemos observar que no contamos con datos redundantes, por lo que podríamos dejar los datos como se encuentran y empezar con el análisis.</p>
+
+### Análisis de datos
+
+<p>Vamos a realizar un conteo de viajes dependiendo de diferentes factores de la siguiente manera: </p>
+
+````
+def plot_count_by_category(data, category):
+    plt.figure(figsize=(12, 6))
+    sns.barplot(
+        x=category,
+        y='count',
+        data=data.groupby(category).size().reset_index(name='count'),
+        palette='viridis'
+    )
+    plt.xlabel(category.capitalize())
+    plt.ylabel('Count')
+    plt.title(f'Count of Trips by {category.capitalize()}')
+    plt.show()
+````
+
+<p>Como primera comparación, lo vamos a hacer con la hora del día.</p>
+
+````
+plot_count_by_category(data, 'hour')
+````
+
+![Figura 11. trips by hora]()
+
+<p>En esta imagen podemos observar que existe una mayor cantidad de viajes entre las 18:00 y 19:00, esto puede deberse a que son las horas pico dentro de la ciudad de Nueva York. Esto podemos asociarlo con una mayor cantidad de tráfico debido a la demanda. 
+Así mismo, podemos observar que de 1:00 a 6:00 la cantidad de viajes es mucho menor en comparación al resto del día debido a que la mayoría de gente descansa
+Existe una cantidad similar de viajes entre las 7:00 y 17:00.
+En base al gráfico podemos observar que la mayor cantidad de viajes se realizan entre las 18:00 y las 23:00.</p>
+
+<p>Para tener una visión más general de la cantidad de viajes que se realizan entre la mañana, tarde y noche podemos utilizar el periodo del día</p>
+
+````
+plot_count_by_category(data, 'time_of_day')
+````
+
+![Figura 12. trips by tiempo de dia]()
+
+<p>Como se describió antes, podemos observar que la mayor cantidad de viajes se realizan en la noche. Posteriormente tendremos que la mayor cantidad de viajes se realiza en la mañana seguido por la tarde y finalmente la noche. </p>
+
+<p>Ahora realizaremos una comparación con el día de la semana</p>
+
+````
+plot_count_by_category(data, 'day_of_week')
+````
+
+![Figura 13. trips by day]()
+
+<p>Asumiendo que 0 representa lunes y 6 representa domingo, tenemos que los días donde más viajes existen son viernes y sábado. Esto puede ser debido a que es considerado el fin de semana por lo que se puede llegar a aprovechar en visitas a parques o atracciones turísticas, pero también podemos considerar un indicador de mayor flujo de personas dentro de la ciudad lo que deriba en tráfico. 
+Los días con menos viajes vendrían a ser lunes y domingo, que podríamos relacionarlo con el inicio de semana por lo que la gente se ve en la necesidad de volver a sus rutinas y tratar de evitar el tráfico usando otro tipo de transportes.</p>
+
+<p>Ahora realizaremos una comparación con el mes</p>
+
+````
+plot_count_by_category(data, 'month')
+````
+
+<p>En esta gráfica podemos observar que de enero a junio existe un flujo casi constante de viajes realizados. Esto podría deberse a factores como:
+  
+- El clima: El clima podría jugar un papel fundamental en que las personas prefieran tomar taxi a caminar
+- Eventos turísticos: Se conoce que New York es una de las ciudades más transitadas por extranjeros, por lo que las fechas de mayor flujo de viajes coincide con ciertas festividades de latinoamérica y europa
+- Desplazamientos laborales: Al ser la primera parte del año, las personas se encuentran viajando hacia sus trabajos y podrían llegar a preferir el uso de taxis.</p>
+
+<p>Ahora realizaremos una comparación con el año</p>
+
+````
+plot_count_by_category(data, 'year')
+````
+
+![Figura 14. trips by year]()
+
+<p></p>
