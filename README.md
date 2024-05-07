@@ -9,9 +9,7 @@
 
 Datos:</p>
 
-<p>
 [nyc_taxi_hw .csv](https://github.com/AndresProano/DataCleaning/blob/main/nyc_taxi_hw%20.csv)
-</p>
 
 ## Procedimiento: 
 
