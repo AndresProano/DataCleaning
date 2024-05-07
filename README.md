@@ -108,6 +108,12 @@ data.drop(['pickup_datetime'], axis=1, inplace=True)
 
 ![Figura 4. Info después de eliminar pickup datetime]()
 
+<p>Otro punto importante que podemos notar dentro de los datos es que "Unamed:0" puede interpretarse como un identificador de los datos. Pero, también contamos con "key" que vendría a ser un identificador de igual forma. Podemos eliminar "Unnamed:0". </p>
+
+````
+data.drop(['Unnamed: 0'], axis=1, inplace=True)
+````
+
 
 
 
