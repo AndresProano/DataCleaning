@@ -134,9 +134,9 @@ def get_time_of_day(hour):
 data['time_of_day'] = data['hour'].apply(get_time_of_day)
 ````
 
-![Figura 6. Info después de agregar tiempo de dia]()
+![Figura 6. Info después de agregar tiempo de dia](https://github.com/AndresProano/DataCleaning/blob/main/images/6.png)
 
-![Figura 7. Data despues de agregar tiempo de dia]()
+![Figura 7. Data despues de agregar tiempo de dia](https://github.com/AndresProano/DataCleaning/blob/main/images/7.png)
 
 <p>Otra acción que podemos realizar es el cambio de "passenger_count" de int64 a int32 debido a que no se utiliza de forma eficiente el int64.</p>
 
@@ -144,7 +144,7 @@ data['time_of_day'] = data['hour'].apply(get_time_of_day)
 data['passenger_count'] = data['passenger_count'].astype('int32')
 ````
 
-![Figura 8. Info despues de transformar passegner_count a int32]()
+![Figura 8. Info despues de transformar passegner_count a int32](https://github.com/AndresProano/DataCleaning/blob/main/images/8.png)
 
 <p>Entre los datos contamos con "pickup_longitude", "pickup_latitude", "dropoff_longitude" y "dropoff_latitude". Con estos datos, podemos calcular la distancia que se recorrió aproximadamente en cada viaje. Para realizar esto, utilizamos</p>
 
@@ -163,4 +163,4 @@ for pickup, dropoff in zip(pickup_coords.values, dropoff_coords.values):
 data['distance_km'] = distances
 ````
 
-![Figura 9. Info despues de agregar distancia en KM]()
+![Figura 9. Info despues de agregar distancia en KM](https://github.com/AndresProano/DataCleaning/blob/main/images/9.png)
