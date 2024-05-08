@@ -246,7 +246,7 @@ plt.title('Correlation Matrix Heatmap')
 plt.show()
 ````
 
-![Figura 10. correlation matrix heatmap]()
+![Figura 10. correlation matrix heatmap](https://github.com/AndresProano/DataCleaning/blob/main/images/9.png)
 
 <p>Podemos observar que no contamos con datos redundantes, por lo que podríamos dejar los datos como se encuentran y empezar con el análisis.</p>
 
