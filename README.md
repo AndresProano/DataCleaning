@@ -325,4 +325,143 @@ plot_count_by_category(data, 'year')
 
 <p>En este gráfico podemos observar que en la mayoría de años existe un número similar de viajes. El último año, 2015, va en tendencia a tener la misma cantidad de viajes ya que hasta el momento solo existen datos hasta 2015-06-30.</p>
 
+<p>Ahora, podemos visualizar los costos dependiendo de la hora y fecha con la siguiente función.</p>
 
+````
+def plot_avg_price_by_category(data, category):
+    plt.figure(figsize=(12, 6))
+    sns.barplot(
+        x=category,
+        y='fare_amount',
+        data=data.groupby(category)['fare_amount'].mean().reset_index(),
+        palette='viridis'
+    )
+    plt.xlabel(category.capitalize())
+    plt.ylabel('Precio Promedio')
+    plt.title(f'Precio Promedio por {category.capitalize()}')
+    plt.show()
+````
+
+<p>Primero empezaremos visualizando el precio por horas.</p>
+
+![Figura 20. Precio por hora]()
+
+<p>Podemos observar que el precio más elevado se encuentra entre las 4:00 y 5:00 de la mañana. Mientras que los otros precios se encuentran entre un mismo rango, siendo entre los más baratos entre las 8:00 y 9:00, 18:00 y 19:00</p>
+
+<p>Ahora, visualicemos el precio comparado con el día</p>
+
+![Figura 21. precio por dia]()
+
+<p>De igual forma, podemos observar que el precio se encuentra igual entre los días de la semana, casi por el mismo rango. </p>
+
+<p>Ahora, visualicemos el precio comparado con el mes</p>
+
+![Figura 22. precio por mes]()
+
+<p>Podemos observar que entre septiembre y diciembre se encuentra un precio más elevado, esto puede deberse a diferentes festividades que celebra la ciudad y el aumento de turismo dentro de esos días. Esto se ve reflejado en los precios ya que existe una mayor demanda y afluencia de gente por las calles, provocando un mayor tráfico.</p>
+
+<p>Finalmente, visualicemos el precio por año</p>
+
+![Figra 23. precio por año]()
+
+<p>Podemos observar un claro aumento en el precio por año. Esto se puede deber a la inflación y a diferentes cosas como, el clima, número de personas en aumento por año, etc.</p>
+
+
+### Regresión lineal
+
+<p>Para realizar la regresión lineal, podemos utilizar el siguiente comando</p>
+
+````
+df_limpiado = data.dropna()
+
+X = df_limpiado[['passenger_count', 'hour', 'day_of_week', 'month', 'year', 'distance_km']]
+y = df_limpiado['fare_amount']
+
+modelo.fit(X, y)
+````
+
+<p>Donde utilizamos df_limpiado debido a que descartamos datos que cuenten con nulos. 
+x = df_limpiado[['passenger_count', 'hour', 'day_of_week', 'month', 'year', 'distance_km'], aquí seleccionamos las características o variables independientes que se utilizarán para entrenar el modelo
+y = df_limpiado['fare_amount'], aquí seleccionamos la variable dependiente que tratamos de predecir
+modelo.fit(X, y), aquí entrenamos el modelo.
+</p>
+
+<p>Colocamos este codigo para obtener una predicción del precio</p>
+
+````
+imputer = SimpleImputer(strategy='mean')
+X_imputado = imputer.fit_transform(X)
+
+modelo.fit(X_imputado, y)
+
+nueva_instancia = X_imputado[0].reshape(1, -1) 
+prediccion = modelo.predict(nueva_instancia)
+print('Predicción de tarifa:', prediccion[0])
+````
+
+<p>Y obtenemos el precio:</p>
+
+````
+Predicción de tarifa: 9.405917019823164
+````
+
+<p>Podemos observar que el valor está elevado, por lo que vamos a verificar los valores</p>
+
+````
+predicciones = modelo.predict(X)
+
+mse = mean_squared_error(y, predicciones)
+mae = mean_absolute_error(y, predicciones)
+r2 = r2_score(y, predicciones)
+
+print('Error cuadrático medio (MSE):', mse)
+print('Error absoluto medio (MAE):', mae)
+print('Coeficiente de determinación (R^2):', r2)
+````
+
+<p>Obtenemos como resultado</p>
+
+````
+Error cuadrático medio (MSE): 90.40721546082786
+Error absoluto medio (MAE): 5.922590579934248
+Coeficiente de determinación (R^2): 0.01885069029958164
+````
+
+<p>Lo cual es un error elevado, por lo que ahora vamos a realizar el proceso de una manera diferente, utilizamos:</p>
+
+````
+from sklearn.neural_network import MLPRegressor
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+mlp_regressor = MLPRegressor(hidden_layer_sizes=(100, 50), activation='relu', solver='adam', max_iter=500, random_state=42)
+
+mlp_regressor.fit(X_train_scaled, y_train)
+
+y_pred = mlp_regressor.predict(X_test_scaled)
+
+mse = mean_squared_error(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print('Error cuadrático medio (MSE):', mse)
+print('Error absoluto medio (MAE):', mae)
+print('Coeficiente de determinación (R^2):', r2)
+````
+
+<p>Donde obtenemos que</p>
+
+````
+Error cuadrático medio (MSE): 20.736244716072008
+Error absoluto medio (MAE): 2.11280617373501
+Coeficiente de determinación (R^2): 0.7670390501035936
+````
+
+<p>Que son valores mucho más aceptados.</p>
