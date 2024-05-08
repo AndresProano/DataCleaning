@@ -209,7 +209,7 @@ for pickup, dropoff in zip(pickup_coords.values, dropoff_coords.values):
 data['distance_km'] = distances
 ````
 
-![Figura 9. Info despues de agregar distancia en KM]()
+![Figura 9. Info despues de agregar distancia en KM](https://github.com/AndresProano/DataCleaning/blob/main/images/km.png)
 
 <p>Podemos visualizar y eliminar los datos que cuenten con km cero, debido a que no son posibles </p>
 
@@ -217,7 +217,7 @@ data['distance_km'] = distances
 data = data[data['distance_km'] != 0]
 ````
 
-![Figura 18. Info despues de eliminar km de cero]()
+![Figura 18. Info despues de eliminar km de cero](https://github.com/AndresProano/DataCleaning/blob/main/images/18.png)
 
 <p>Ahora podemos verificar cualquier tipo de valores atípicos de km con la siguiente función</p>
 
@@ -233,7 +233,7 @@ print("Valores atípicos:")
 print(valores_atipicos)
 ````
 
-![Figura 19. valores atipicos]()
+![Figura 19. valores atipicos](https://github.com/AndresProano/DataCleaning/blob/main/images/19.png)
 
 <p>Para verificar que no tenemos datos redundantes, podemos usar:</p>
 
@@ -275,7 +275,7 @@ def plot_count_by_category(data, category):
 plot_count_by_category(data, 'hour')
 ````
 
-![Figura 11. trips by hora]()
+![Figura 11. trips by hora](https://github.com/AndresProano/DataCleaning/blob/main/images/10.png)
 
 <p>En esta imagen podemos observar que existe una mayor cantidad de viajes entre las 18:00 y 19:00, esto puede deberse a que son las horas pico dentro de la ciudad de Nueva York. Esto podemos asociarlo con una mayor cantidad de tráfico debido a la demanda. 
 Así mismo, podemos observar que de 1:00 a 6:00 la cantidad de viajes es mucho menor en comparación al resto del día debido a que la mayoría de gente descansa
@@ -288,7 +288,7 @@ En base al gráfico podemos observar que la mayor cantidad de viajes se realizan
 plot_count_by_category(data, 'time_of_day')
 ````
 
-![Figura 12. trips by tiempo de dia]()
+![Figura 12. trips by tiempo de dia](https://github.com/AndresProano/DataCleaning/blob/main/images/11.png)
 
 <p>Como se describió antes, podemos observar que la mayor cantidad de viajes se realizan en la noche. Posteriormente tendremos que la mayor cantidad de viajes se realiza en la mañana seguido por la tarde y finalmente la noche. </p>
 
@@ -298,7 +298,7 @@ plot_count_by_category(data, 'time_of_day')
 plot_count_by_category(data, 'day_of_week')
 ````
 
-![Figura 13. trips by day]()
+![Figura 13. trips by day](https://github.com/AndresProano/DataCleaning/blob/main/images/12.png)
 
 <p>Asumiendo que 0 representa lunes y 6 representa domingo, tenemos que los días donde más viajes existen son viernes y sábado. Esto puede ser debido a que es considerado el fin de semana por lo que se puede llegar a aprovechar en visitas a parques o atracciones turísticas, pero también podemos considerar un indicador de mayor flujo de personas dentro de la ciudad lo que deriba en tráfico. 
 Los días con menos viajes vendrían a ser lunes y domingo, que podríamos relacionarlo con el inicio de semana por lo que la gente se ve en la necesidad de volver a sus rutinas y tratar de evitar el tráfico usando otro tipo de transportes.</p>
@@ -321,7 +321,7 @@ plot_count_by_category(data, 'month')
 plot_count_by_category(data, 'year')
 ````
 
-![Figura 14. trips by year]()
+![Figura 14. trips by year](https://github.com/AndresProano/DataCleaning/blob/main/images/14.png)
 
 <p>En este gráfico podemos observar que en la mayoría de años existe un número similar de viajes. El último año, 2015, va en tendencia a tener la misma cantidad de viajes ya que hasta el momento solo existen datos hasta 2015-06-30.</p>
 
