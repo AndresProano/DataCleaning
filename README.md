@@ -144,6 +144,54 @@ data['time_of_day'] = data['hour'].apply(get_time_of_day)
 data['passenger_count'] = data['passenger_count'].astype('int32')
 ````
 
+<p>Ahora, vamos a verificar los valores de pasajeros que sean igual a cero. Estos no tienen sentido dentro del análisis de datos por lo que también los eliminaremos.</p>
+
+````
+datos_pasajeros_cero = data[data['passenger_count'] == 0]
+data = data[data['passenger_count'] != 0]
+````
+
+<p>Para verificar que fueron eliminados utilizaremos</p>
+
+````
+datos_pasajeros_cero.head()
+````
+
+![Figura 15. DatosPasajeroCero]()
+
+<p>También verificaremos los precios que estén en cero ya que no tienen sentido dentro del análisis. Serán eliminados.</p>
+
+````
+data = data[data['fare_amount'] != 0]
+````
+
+<P>Para verificar cuantos datos fueron eliminados utilizaremos</P>
+
+````
+data.info()
+````
+
+![Figura 16. Info despues de eliminar fareamount]()
+
+<p>Podemos visualizar una disminución de datos, por lo que concluimos que están eliminados</p>
+
+<p>Ahora, en la misma categoria de fare_amount eliminaremos los precios que sean menores a cero, ya que no tiene sentido dentro del análisis</p>
+
+````
+datos_precio_menos = data[data['fare_amount'] <= 0]
+````
+
+<p>Eliminaremos las localizaciones que tengan como coordenadas 0.0, esto quiere decir que en pickup_longitude, pickup_latitude, dropoff_longitude y dropoff_latitude filtraremos aquellas que se encuentren con 0 ya que no toman lugar dentro de Nueva York</p>
+
+````
+valores_cero = data[(data['pickup_longitude'] == 0) | (data['pickup_latitude'] == 0) | (data['dropoff_longitude'] == 0) | (data['dropoff_latitude'] == 0)]
+data = data[(data['pickup_longitude'] != 0) & (data['pickup_latitude'] != 0) & (data['dropoff_longitude'] != 0) & (data['dropoff_latitude'] != 0)]
+````
+
+![Figura 17. Info despues de eliminar valores cero]()
+
+
+
 ![Figura 8. Info despues de transformar passegner_count a int32](https://github.com/AndresProano/DataCleaning/blob/main/images/8.png)
 
 <p>Entre los datos contamos con "pickup_longitude", "pickup_latitude", "dropoff_longitude" y "dropoff_latitude". Con estos datos, podemos calcular la distancia que se recorrió aproximadamente en cada viaje. Para realizar esto, utilizamos</p>
@@ -253,4 +301,6 @@ plot_count_by_category(data, 'year')
 
 ![Figura 14. trips by year]()
 
-<p></p>
+<p>En este gráfico podemos observar que en la mayoría de años existe un número similar de viajes. El último año, 2015, va en tendencia a tener la misma cantidad de viajes ya que hasta el momento solo existen datos hasta 2015-06-30.</p>
+
+
