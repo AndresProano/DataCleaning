@@ -157,7 +157,7 @@ data = data[data['passenger_count'] != 0]
 datos_pasajeros_cero.head()
 ````
 
-![Figura 15. DatosPasajeroCero]()
+![Figura 15. DatosPasajeroCero](https://github.com/AndresProano/DataCleaning/blob/main/images/15.png)
 
 <p>También verificaremos los precios que estén en cero ya que no tienen sentido dentro del análisis. Serán eliminados.</p>
 
@@ -171,7 +171,7 @@ data = data[data['fare_amount'] != 0]
 data.info()
 ````
 
-![Figura 16. Info despues de eliminar fareamount]()
+![Figura 16. Info despues de eliminar fareamount](https://github.com/AndresProano/DataCleaning/blob/main/images/16.png)
 
 <p>Podemos visualizar una disminución de datos, por lo que concluimos que están eliminados</p>
 
@@ -188,7 +188,7 @@ valores_cero = data[(data['pickup_longitude'] == 0) | (data['pickup_latitude'] =
 data = data[(data['pickup_longitude'] != 0) & (data['pickup_latitude'] != 0) & (data['dropoff_longitude'] != 0) & (data['dropoff_latitude'] != 0)]
 ````
 
-![Figura 17. Info despues de eliminar valores cero]()
+![Figura 17. Info despues de eliminar valores cero](https://github.com/AndresProano/DataCleaning/blob/main/images/17.png)
 
 
 
@@ -211,7 +211,7 @@ for pickup, dropoff in zip(pickup_coords.values, dropoff_coords.values):
 data['distance_km'] = distances
 ````
 
-![Figura 9. Info despues de agregar distancia en KM](https://github.com/AndresProano/DataCleaning/blob/main/images/9.png)
+![Figura 9. Info despues de agregar distancia en KM]()
 
 <p>Para verificar que no tenemos datos redundantes, podemos usar:</p>
 
