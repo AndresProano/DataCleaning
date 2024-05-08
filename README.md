@@ -144,6 +144,8 @@ data['time_of_day'] = data['hour'].apply(get_time_of_day)
 data['passenger_count'] = data['passenger_count'].astype('int32')
 ````
 
+![Figura 8. Info despues de transformar passegner_count a int32](https://github.com/AndresProano/DataCleaning/blob/main/images/8.png)
+
 <p>Ahora, vamos a verificar los valores de pasajeros que sean igual a cero. Estos no tienen sentido dentro del análisis de datos por lo que también los eliminaremos.</p>
 
 ````
@@ -189,10 +191,6 @@ data = data[(data['pickup_longitude'] != 0) & (data['pickup_latitude'] != 0) & (
 ````
 
 ![Figura 17. Info despues de eliminar valores cero](https://github.com/AndresProano/DataCleaning/blob/main/images/17.png)
-
-
-
-![Figura 8. Info despues de transformar passegner_count a int32](https://github.com/AndresProano/DataCleaning/blob/main/images/8.png)
 
 <p>Entre los datos contamos con "pickup_longitude", "pickup_latitude", "dropoff_longitude" y "dropoff_latitude". Con estos datos, podemos calcular la distancia que se recorrió aproximadamente en cada viaje. Para realizar esto, utilizamos</p>
 
