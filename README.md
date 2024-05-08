@@ -344,25 +344,25 @@ def plot_avg_price_by_category(data, category):
 
 <p>Primero empezaremos visualizando el precio por horas.</p>
 
-![Figura 20. Precio por hora]()
+![Figura 20. Precio por hora](https://github.com/AndresProano/DataCleaning/blob/main/images/20.png)
 
 <p>Podemos observar que el precio más elevado se encuentra entre las 4:00 y 5:00 de la mañana. Mientras que los otros precios se encuentran entre un mismo rango, siendo entre los más baratos entre las 8:00 y 9:00, 18:00 y 19:00</p>
 
 <p>Ahora, visualicemos el precio comparado con el día</p>
 
-![Figura 21. precio por dia]()
+![Figura 21. precio por dia](https://github.com/AndresProano/DataCleaning/blob/main/images/21.png)
 
 <p>De igual forma, podemos observar que el precio se encuentra igual entre los días de la semana, casi por el mismo rango. </p>
 
 <p>Ahora, visualicemos el precio comparado con el mes</p>
 
-![Figura 22. precio por mes]()
+![Figura 22. precio por mes](https://github.com/AndresProano/DataCleaning/blob/main/images/22.png)
 
 <p>Podemos observar que entre septiembre y diciembre se encuentra un precio más elevado, esto puede deberse a diferentes festividades que celebra la ciudad y el aumento de turismo dentro de esos días. Esto se ve reflejado en los precios ya que existe una mayor demanda y afluencia de gente por las calles, provocando un mayor tráfico.</p>
 
 <p>Finalmente, visualicemos el precio por año</p>
 
-![Figra 23. precio por año]()
+![Figra 23. precio por año](https://github.com/AndresProano/DataCleaning/blob/main/images/23.png)
 
 <p>Podemos observar un claro aumento en el precio por año. Esto se puede deber a la inflación y a diferentes cosas como, el clima, número de personas en aumento por año, etc.</p>
 
