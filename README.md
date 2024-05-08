@@ -211,6 +211,30 @@ data['distance_km'] = distances
 
 ![Figura 9. Info despues de agregar distancia en KM]()
 
+<p>Podemos visualizar y eliminar los datos que cuenten con km cero, debido a que no son posibles </p>
+
+````
+data = data[data['distance_km'] != 0]
+````
+
+![Figura 18. Info despues de eliminar km de cero]()
+
+<p>Ahora podemos verificar cualquier tipo de valores atípicos de km con la siguiente función</p>
+
+````
+print(data['distance_km'].describe())
+
+Q1 = data['distance_km'].quantile(0.25)
+Q3 = data['distance_km'].quantile(0.75)
+IQR = Q3 - Q1
+filtro_atipico = (data['distance_km'] < (Q1 - 1.5 * IQR)) | (data['distance_km'] > (Q3 + 1.5 * IQR))
+valores_atipicos = data[filtro_atipico]
+print("Valores atípicos:")
+print(valores_atipicos)
+````
+
+![Figura 19. valores atipicos]()
+
 <p>Para verificar que no tenemos datos redundantes, podemos usar:</p>
 
 ````
